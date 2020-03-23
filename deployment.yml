@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: time-teller-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: time-teller
+  template:
+    metadata:
+      labels:
+        app: time-teller
+    spec:
+      containers:
+      - name: time-teller
+        image: ogaday/time-teller:latest
+        imagePullPolicy: IfNotPresent 
+        env:
+        - name: TIME_TELLER__STEP
+          value: "2"
+        - name: TIME_TELLER__LOG_TEMPLATE
+          value: "It is %c"
+
